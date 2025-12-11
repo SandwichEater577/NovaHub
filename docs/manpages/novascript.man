@@ -39,4 +39,4 @@ WARNINGS:
 - Unknown commands raise "Unknown NovaScript command" error
 
 SEE ALSO:
-man run, man nano, enter NovaScript
+man run, man nano, man novascript-functions, man novascript-loops

@@ -1,0 +1,10 @@
+# Fibonacci example - NovaScript
+set a = 0
+set b = 1
+set n = 10
+for i in 1 to n {
+  print a
+  set c = a + b
+  set a = b
+  set b = c
+}

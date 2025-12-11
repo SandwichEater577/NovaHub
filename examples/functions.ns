@@ -1,0 +1,11 @@
+# functions.ns - demo of NovaScript functions
+func greet(name) {
+  print "Hello " + name
+}
+
+func add(x, y) {
+  print x + y
+}
+
+greet("Novahub")
+add(3, 7)

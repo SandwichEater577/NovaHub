@@ -1,0 +1,38 @@
+COMMAND: NovaScript Loops
+
+HOW TO USE:
+while [condition] { ... }
+for <var> in <start> to <end> { ... }
+
+EXAMPLE:
+set i = 1
+while [i <= 5] {
+  print i
+  set i = i + 1
+}
+
+for i in 1 to 3 {
+  print i
+}
+
+DESCRIPTION:
+NovaScript supports both `while` and `for` constructs. `while` evaluates a
+boolean expression and executes its body while true. `for` uses a start
+and end integer; it iterates inclusive of the end value.
+
+LANGUAGE:
+NovaScript
+
+NOTES:
+- The runtime enforces a `MAX_ITERATIONS` count to protect from infinite
+  loops.
+- Use `set var = expr` within the loop to modify counter variables.
+
+WARNINGS:
+- Infinite loops are detected and throw an error if the iteration limit
+  is exceeded.
+- There is no built-in break/continue yet — consider refactoring loops
+  into smaller functions for complex control flow.
+
+SEE ALSO:
+man novascript, man novascript-functions, man run
