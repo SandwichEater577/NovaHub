@@ -1,321 +1,265 @@
-# NovaHub - D-Edition
+⭐ NovaHub — Terminal OS + Scripting Language + AI Toolkit
 
-A terminal-based developer environment with NovaScript language interpreter, NovaGPT assistant, and background job management.
+A lightweight terminal-based development environment featuring:
+✔ A virtual OS
+✔ The NovaScript programming language
+✔ Integrated AI assistant (NovaGPT)
+✔ File system, editor, job manager, manpages, and more.
 
-## Features
+🏷️ Badges
+![Version](https://img.shields.io/github/v/release/SandwichEater577/NovaHub)
+![Downloads](https://img.shields.io/github/downloads/SandwichEater577/NovaHub/total)
+![License](https://img.shields.io/github/license/SandwichEater577/NovaHub)
+![MadeWith](https://img.shields.io/badge/Made%20with-Python%203.13-blue)
 
-- **Virtual Filesystem**: Isolated environment under `~/NovaHubDocuments`
-- **NovaScript**: Lightweight scripting language with variables, expressions, and control flow
-- **NovaGPT**: Simulated AI assistant for development queries
-- **nano Editor**: NovaScript-based file editor with line management
-- **Job Control**: Run scripts in background with thread-based job management
-- **Man Pages**: Built-in documentation system with pager
-- **Language Detection**: Support for NovaScript, JavaScript, Python, and Java
-- **Autosuggest**: Smart command suggestions using difflib
-- **Settings**: Persistent configuration stored in JSON
 
-## Requirements
+(Replace this block in your README with the actual badge links if GitHub doesn’t auto-render them.)
 
-- Python 3.11 or newer
-- No external dependencies (uses only Python standard library)
+🚀 About NovaHub
 
-## Quick Start
+NovaHub is a fully custom terminal environment and scripting platform, designed to feel like a mix of:
 
-1. **Run NovaHub**:
-   ```bash
-   python3 src/NovaHub.py
-   ```
+Linux terminal
 
-2. **Create a folder**:
-   ```
-   NovaHub=~==> mkdir myproject
-   ```
+A lightweight OS
 
-3. **Navigate to folder**:
-   ```
-   NovaHub=~==> cd myproject
-   ```
+Custom scripting language (NovaScript)
 
-4. **Create a NovaScript file**:
-   ```
-   NovaHub=~/myproject==> nano main.ns
-   ```
+AI development assistant (NovaGPT)
 
-5. **Write NovaScript code**:
-   ```
-   set message = "Hello NovaHub"
-   print message
-   ```
-   (Type `exit` to save and leave)
+Virtual file system with projects, tools, and job control
 
-6. **Run the script**:
-   ```
-   NovaHub=~/myproject==> run main.ns
-   ```
+All inside one Python-powered application.
 
-## NovaScript Syntax
+It includes:
 
-### Variables and Expressions
+A full virtual filesystem under ~/NovaHubDocuments
 
-```
-set x = 10
-set y = 20
-set sum = x + y
-print sum
-```
+A working nano-style text editor
 
-### Printing Values
+A robust man page system
 
-```
-set greeting = "Hello"
-print greeting
-print "World"
-```
+Background job execution (run file.ns &)
 
-### Conditional Logic
+Auto-suggestions
 
-```
-set age = 25
-if [age >= 18] then [print "Adult"] else [print "Minor"]
-```
+A modular architecture for future tools (NovaStore, NovaTools, etc.)
 
-### Operators
+NovaHub is built for developers, learners, and anyone who wants their own customizable terminal OS.
 
-- **Arithmetic**: `+`, `-`, `*`, `/`, `//`, `%`, `**`
-- **Comparison**: `==`, `!=`, `<`, `<=`, `>`, `>=`
-- **Boolean**: `and`, `or`, `not`
+📦 Download
+👉 Download the latest NovaHub.exe:
 
-### Built-in Commands
+➡ https://github.com/SandwichEater577/NovaHub/releases/latest
 
-- `set <name> = <expression>` - Assign variable
-- `print <value>` - Print to console
-- `if [condition] then [command] else [command]` - Conditional execution
-- `vars` - List all variables
-- `exit` - Exit interpreter
-- `help` - Show help
+No Python required.
+Just download and run.
 
-## Commands
+🧰 Features
+🌐 NovaHub Shell
 
-### File Operations
+A minimalistic terminal OS with:
 
-- **mkdir** - Create folder or file
-  ```
-  mkdir projects
-  mkdir "main.ns" --ns
-  ```
-- **ls** - List directory contents
-  ```
-  ls
-  ls projects
-  ```
-- **cd** - Change directory
-  ```
-  cd projects
-  cd ..
-  ```
-- **cat** - Display file contents
-  ```
-  cat main.ns
-  ```
-- **grep** - Search in files (regex supported)
-  ```
-  grep "pattern" main.ns
-  ```
+mkdir, ls, cd, cat, grep
 
-### Code Editing & Execution
+nano editor
 
-- **nano** - Edit NovaScript files
-  ```
-  nano main.ns
-  ```
-  - `show` - Display buffer
-  - `delete <line#>` - Remove line
-  - `replace <line#> <text>` - Replace line
-  - `insert <line#> <text>` - Insert line
-  - `save` - Save without exiting
-  - `exit` - Save and exit
-  - `quit` - Exit without saving
+man documentation system
 
-- **run** - Execute NovaScript
-  ```
-  run main.ns       # Foreground
-  run worker.ns &   # Background
-  ```
+run foreground / run file & background execution
 
-### Job Management
+jobs and kill
 
-- **jobs** - List running jobs
-  ```
-  jobs
-  ```
-- **kill** - Terminate job
-  ```
-  kill 1
-  ```
+Settings system (colors, suggestions, etc.)
 
-### Documentation & Settings
+Auto-correct suggestions for commands
 
-- **man** - Read manuals
-  ```
-  man NovaScript
-  man nano
-  man command
-  ```
-- **settings** - Configure preferences
-  ```
-  settings              # Show all
-  settings toggle suggestions
-  ```
+🧪 NovaScript Language
 
-### Modes
+NovaHub’s custom programming language.
 
-- **enter NovaScript** - Interactive interpreter
-  ```
-  enter NovaScript
-  NovaScript=> set x = 42
-  NovaScript=> print x
-  ```
+Supports:
 
-- **enter NovaGPT** - Chat with simulated AI
-  ```
-  enter NovaGPT
-  NovaGPT=> Nova@"How do I create a variable?"
-  ```
+Variables (set x = 5)
 
-## Man System
+Expressions (x + 2)
 
-The man system provides built-in documentation for all commands:
+Strings ("Hello")
 
-```
+Printing (print x)
+
+One-line conditional logic:
+
+if [x < 10] then [print x] else [print "big"]
+
+
+Comments (# this is a comment)
+
+Integrated AI helper inside NovaScript:
+
+N@"create a function that calculates velocity"
+
+🤖 NovaGPT
+
+AI chat system inside NovaHub.
+
+Two modes:
+
+NovaHub → NovaGPT:
+Ask questions, brainstorm ideas, get help.
+
+NovaScript → NovaGPT (code only):
+N@"write code" generates NovaScript code automatically.
+
+(Currently simulated; optional real API support planned.)
+
+📝 Nano Editor
+
+A file editor built into NovaHub.
+
+No line numbers (clean & minimal)
+
+Saves automatically on exit
+
+Can create new files with language extension selection
+
+Used mainly for NovaScript development
+
+📚 Manpage System
+
+Like Linux:
+
 man NovaHub
 man NovaScript
 man nano
-man run
-man settings
-```
+man mkdir
+man lang
+man command
 
-**Navigation**:
-- **SPACE** - Next page
-- **ENTER** - Next line
-- **q** - Quit pager
 
-## Background Jobs
+Pages include:
 
-Run long-running scripts in the background:
+COMMAND
 
-```
-run long_task.ns &   # Start job in background
-jobs                 # Monitor progress
-kill 1               # Terminate job
-```
+HOW TO USE
 
-Background jobs:
-- Run in separate threads
-- Can be monitored with `jobs`
-- Cannot accept interactive input
-- Must be terminated with `kill <id>`
+EXAMPLE
 
-## File Structure
+DESCRIPTION
 
-```
-NovaHubDocuments/
-├── Projects/
-│   └── Main/
-├── System/
-│   └── man/
-└── Config/
-    └── config.json
-```
+LANGUAGE
 
-## nano Editor
+NOTES
 
-The nano editor is NovaScript-specific:
+WARNINGS
 
-1. **Create/edit file**:
-   ```
-   nano myfile
-   ```
+SEE ALSO
 
-2. **Type commands** (not executed, just stored):
-   ```
-   set x = 1
-   print x
-   ```
+With a full pager:
+SPACE = next page, ENTER = next line, q = quit
 
-3. **Line management**:
-   - Add lines by typing
-   - `show` - See all lines
-   - `delete 1` - Remove line 1
-   - `replace 1 "new text"` - Update line
+🛠️ Installation
+Option A — Run the Windows EXE
 
-4. **Save & exit**:
-   - `exit` - Save
-   - `quit` - Discard changes
+Download the latest release:
+👉 https://github.com/SandwichEater577/NovaHub/releases/latest
 
-## Language Detection
+Run:
 
-Supported file extensions:
+NovaHub.exe
 
-- `.ns` - NovaScript
-- `.js` - JavaScript
-- `.py` - Python
-- `.java` - Java
 
-When creating files without extension, you'll be prompted to choose a language.
+Done!
+NovaHub creates the directory:
 
-## Settings
+C:\Users\<you>\NovaHubDocuments
 
-Configuration is stored in `~/NovaHubDocuments/Config/config.json`:
+Option B — Run from source (requires Python 3.11+)
 
-```json
-{
-  "suggestions": true,
-  "colors": true,
-  "start_cwd": "~/Projects/Main",
-  "remember_language": false
-}
-```
+Clone the repo:
 
-**Available settings**:
-- `suggestions` - Enable command autosuggest
-- `colors` - Enable colored output
-- `start_cwd` - Initial working directory
+git clone https://github.com/SandwichEater577/NovaHub.git
+cd NovaHub/src
+python NovaHub.py
 
-Toggle settings:
-```
-settings toggle suggestions
-```
+🔤 Hello World in NovaScript
 
-## Examples
+Create a file:
 
-See `examples/HelloWorld/main.ns` for a simple NovaScript program.
+nano Hello.ns
 
-## License
 
-MIT License - See LICENSE file for details
+Write:
 
-## Project Structure
+set msg = "Hello World"
+print msg
+exit
 
-```
-NovaHub/
-├── src/
-│   └── NovaHub.py          # Main application
-├── docs/
-│   └── manpages/           # Documentation files
-├── examples/
-│   └── HelloWorld/
-│       └── main.ns         # Example script
-├── .gitignore
-├── LICENSE
-└── README.md
-```
 
-## Development
+Run it:
 
-NovaHub D-Edition is a single-file Python application designed for:
-- Easy deployment
-- No external dependencies
-- Cross-platform compatibility
-- Quick learning of scripting concepts
+run Hello.ns
 
-All functionality is contained within `src/NovaHub.py`.
+
+Output:
+
+Hello World
+
+🧪 Example Commands
+NovaHub=> mkdir Projects
+NovaHub=> cd Projects
+NovaHub=> nano main.ns
+NovaHub=> run main.ns
+NovaHub=> run server.ns &
+NovaHub=> jobs
+NovaHub=> kill 1
+NovaHub=> man NovaScript
+
+🌱 Roadmap (Upcoming Versions)
+v0.4
+
+NovaScript loops (for, while)
+
+Functions
+
+File import system
+
+NovaGPT real API support (optional)
+
+Improved nano editing commands
+
+v0.5
+
+Plugin system (NovaTools)
+
+NovaHub Store (novapkg)
+
+Themes for terminal
+
+FS permissions
+
+1.0
+
+Stable NovaScript compiler
+
+Package manager
+
+Editor improvements
+
+Real AI-assisted development
+
+Automatic updates
+
+🤝 Contributing
+
+PRs welcome!
+Please open an issue first to discuss features or bugs.
+
+📜 License
+
+MIT License — free to use, modify, and distribute.
+
+🙌 Credits
+
+Created by SandwichEater577
+Built with ❤️ in Python.
