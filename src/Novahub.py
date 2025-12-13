@@ -244,7 +244,7 @@ class NovaGPTModule:
             try:
                 with open(API_KEY_PATH, "r", encoding="utf-8") as f:
                     return f.read().strip()
-            except:
+            except Exception:
                 return None
         return None
     
@@ -255,7 +255,7 @@ class NovaGPTModule:
             with open(API_KEY_PATH, "w", encoding="utf-8") as f:
                 f.write(key)
             return True
-        except:
+        except Exception:
             return False
     
     def add_message(self, role, content):
@@ -475,32 +475,48 @@ class NovaScriptRuntime:
                 return self.vars[node.id]
             raise RuntimeError(f"Unknown variable: {node.id}")
         if isinstance(node, ast.BinOp):
-            l = self._eval_node(node.left, local_scope)
-            r = self._eval_node(node.right, local_scope)
-            if isinstance(node.op, ast.Add): return l + r
-            if isinstance(node.op, ast.Sub): return l - r
-            if isinstance(node.op, ast.Mult): return l * r
-            if isinstance(node.op, ast.Div): return l / r
-            if isinstance(node.op, ast.Mod): return l % r
-            if isinstance(node.op, ast.Pow): return l ** r
-            if isinstance(node.op, ast.FloorDiv): return l // r
+            left = self._eval_node(node.left, local_scope)
+            right = self._eval_node(node.right, local_scope)
+            if isinstance(node.op, ast.Add):
+                return left + right
+            if isinstance(node.op, ast.Sub):
+                return left - right
+            if isinstance(node.op, ast.Mult):
+                return left * right
+            if isinstance(node.op, ast.Div):
+                return left / right
+            if isinstance(node.op, ast.Mod):
+                return left % right
+            if isinstance(node.op, ast.Pow):
+                return left ** right
+            if isinstance(node.op, ast.FloorDiv):
+                return left // right
             raise RuntimeError("Unsupported op")
         if isinstance(node, ast.UnaryOp):
             v = self._eval_node(node.operand, local_scope)
-            if isinstance(node.op, ast.USub): return -v
-            if isinstance(node.op, ast.UAdd): return +v
-            if isinstance(node.op, ast.Not): return not v
+            if isinstance(node.op, ast.USub):
+                return -v
+            if isinstance(node.op, ast.UAdd):
+                return +v
+            if isinstance(node.op, ast.Not):
+                return not v
             raise RuntimeError("Unsupported unary op")
         if isinstance(node, ast.Compare):
             left = self._eval_node(node.left, local_scope)
             for op, comp in zip(node.ops, node.comparators):
                 right = self._eval_node(comp, local_scope)
-                if isinstance(op, ast.Eq) and not (left == right): return False
-                if isinstance(op, ast.NotEq) and not (left != right): return False
-                if isinstance(op, ast.Lt) and not (left < right): return False
-                if isinstance(op, ast.LtE) and not (left <= right): return False
-                if isinstance(op, ast.Gt) and not (left > right): return False
-                if isinstance(op, ast.GtE) and not (left >= right): return False
+                if isinstance(op, ast.Eq) and not (left == right):
+                    return False
+                if isinstance(op, ast.NotEq) and not (left != right):
+                    return False
+                if isinstance(op, ast.Lt) and not (left < right):
+                    return False
+                if isinstance(op, ast.LtE) and not (left <= right):
+                    return False
+                if isinstance(op, ast.Gt) and not (left > right):
+                    return False
+                if isinstance(op, ast.GtE) and not (left >= right):
+                    return False
                 left = right
             return True
         if isinstance(node, ast.BoolOp):
@@ -655,7 +671,7 @@ class NovaScriptRuntime:
         for param, arg in zip(func_def["params"], args):
             try:
                 local_scope[param] = self.safe_eval(arg)
-            except:
+            except Exception:
                 local_scope[param] = arg
         body_lines = func_def["body"].strip().split("\n")
         for body_line in body_lines:
@@ -930,7 +946,7 @@ class NovaHubShell:
 
         if "." in name or lang:
             filename = name
-            if not "." in name and lang:
+            if "." not in name and lang:
                 ext = LANG_MAP.get(lang.lower())
                 if not ext:
                     print("Unknown language:", lang)
@@ -1075,7 +1091,7 @@ class NovaHubShell:
                         print("Deleted line", n+1)
                     else:
                         print("Line out of range")
-                except:
+                except Exception:
                     print("Invalid delete usage: delete <line#>")
                 continue
             if cmd.startswith("replace "):
@@ -1169,7 +1185,7 @@ class NovaHubShell:
             return
         try:
             pid = int(args[0])
-        except:
+        except ValueError:
             print("Invalid job id")
             return
         self.jobs.stop_job(pid)
@@ -1188,8 +1204,8 @@ class NovaHubShell:
         if topic == "lang":
             langs = sorted(set([k for k in LANG_MAP.keys() if not k.startswith(".")]))
             print("Available languages:")
-            for l in langs:
-                print("  " + l)
+            for lang in langs:
+                print("  " + lang)
             return
         file_candidate = os.path.join(MAN_DIR, topic + ".man")
         if os.path.exists(file_candidate):
