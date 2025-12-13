@@ -92,6 +92,7 @@ One-line conditional logic:
 
 if [x < 10] then [print x] else [print "big"]
 
+
 Comments (# this is a comment)
 
 Integrated AI helper inside NovaScript:
@@ -135,6 +136,7 @@ man mkdir
 man lang
 man command
 
+
 Pages include:
 
 COMMAND
@@ -166,6 +168,7 @@ Run:
 
 NovaHub.exe
 
+
 Done!
 NovaHub creates the directory:
 
@@ -185,22 +188,22 @@ Create a file:
 
 nano Hello.ns
 
+
 Write:
 
 set msg = "Hello World"
 print msg
 exit
 
+
 Run it:
 
 run Hello.ns
 
+
 Output:
 
 Hello World
-
-![NovaHub Terminal Screenshot](docs/images/novahub_terminal_placeholder.png)
-_Screenshot placeholder — add a real screenshot to `docs/images/novahub_terminal.png`_
 
 🧪 Example Commands
 NovaHub=> mkdir Projects
@@ -254,7 +257,7 @@ Please open an issue first to discuss features or bugs.
 
 📜 License
 
-Apache License 2.0 with an additional commercial use restriction (see `LICENSE`). Please contact `michal@novahub.local` for commercial licensing.
+MIT License — free to use, modify, and distribute.
 
 🙌 Credits
 
