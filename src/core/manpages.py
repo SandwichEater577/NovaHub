@@ -7,34 +7,34 @@ import core.constants as const
 import utils.iohelpers as iohelpers
 
 
-class NovaManSystem:
+class ValyxoManSystem:
     def __init__(self):
         self.pages = self._default_pages()
 
     @staticmethod
     def _default_pages() -> Dict[str, Dict[str, str]]:
         return {
-            "novaHub": {
-                "COMMAND": "NovaHub",
+            "valyxoHub": {
+                "COMMAND": "ValyxoHub",
                 "HOWTO": (
-                    "enter NovaScript | enter NovaGPT | mkdir | ls | cd | cat | grep | "
+                    "enter ValyxoScript | enter ValyxoGPT | mkdir | ls | cd | cat | grep | "
                     "nano | run | jobs | kill | man | settings | -help | quit"
                 ),
                 "EXAMPLE": (
-                    "enter NovaScript\nmkdir Projects/Demo\ncd Projects/Demo\n"
-                    "nano main.ns\nrun main.ns"
+                    "enter ValyxoScript\nmkdir Projects/Demo\ncd Projects/Demo\n"
+                    "nano main.vs\nrun main.vs"
                 ),
                 "DESCRIPTION": (
-                    "NovaHub is a terminal-based developer environment with NovaScript "
-                    "language and NovaGPT assistant."
+                    "ValyxoHub is a terminal-based developer environment with ValyxoScript "
+                    "language and ValyxoGPT assistant."
                 ),
                 "LANGUAGE": "System",
                 "NOTES": "Files stored under ~/Projects/",
-                "WARNINGS": "Do not upload NovaHubDocuments to public repos.",
-                "SEE": "man NovaScript, man nano, man run"
+                "WARNINGS": "Do not upload ValyxoDocuments to public repos.",
+                "SEE": "man ValyxoScript, man nano, man run"
             },
-            "novaScript": {
-                "COMMAND": "NovaScript",
+            "valyxoScript": {
+                "COMMAND": "ValyxoScript",
                 "HOWTO": (
                     "set <name> = <expr>\nprint <expr>\nif [cond] then [cmd] else [cmd]"
                     "\nvars\nexit"
@@ -43,9 +43,9 @@ class NovaManSystem:
                     "set x = 5\nprint x\nif [x < 10] then [print x] else [print \"no\"]"
                 ),
                 "DESCRIPTION": (
-                    "NovaScript is the lightweight language used in NovaHub."
+                    "ValyxoScript is the lightweight language used in ValyxoHub."
                 ),
-                "LANGUAGE": "NovaScript",
+                "LANGUAGE": "ValyxoScript",
                 "NOTES": "Expressions are evaluated safely using ast.",
                 "WARNINGS": "Unknown variables raise errors.",
                 "SEE": "man run, man nano"

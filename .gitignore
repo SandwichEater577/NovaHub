@@ -10,7 +10,7 @@ build/
 .venv
 env/
 venv/
-NovaHubDocuments/
+ValyxoDocuments/
 .DS_Store
 *.swp
 *.swo
