@@ -1,9 +1,9 @@
 # COMMERCIAL USE RESTRICTION NOTICE
 
-This software is subject to the Apache License 2.0 (below) with the following
-additional restriction:
+This software (VALYXO PROJECT) is subject to the Apache License 2.0 (below) with the following
+additional restrictions:
 
-COMMERCIAL USE REQUIRES EXPLICIT WRITTEN LICENSE
+## COMMERCIAL USE REQUIRES EXPLICIT WRITTEN LICENSE
 
 You may NOT use, sell, distribute, or commercialize this software (or any
 derivative works) for any commercial purpose without obtaining a separate
@@ -16,10 +16,28 @@ Commercial use includes, but is not limited to:
 - Bundling or distributing the software as part of a paid product
 - Using the software to generate revenue or provide paid services
 
-For commercial licensing inquiries, contact: michal@novahub.local
+### OPEN SOURCE & NON-COMMERCIAL USE
 
-Non-commercial use (including academic research, personal use, and
-non-profit projects) is permitted under the Apache 2.0 License below.
+Non-commercial use (including academic research, personal use, educational projects,
+and non-profit initiatives) is **FREELY PERMITTED** under the Apache 2.0 License below.
+
+### For Commercial Licensing Inquiries
+
+Contact: contact@valyxo.dev
+
+================================================================================
+
+## VALYXO ECOSYSTEM — Project Scope
+
+This license covers the following components:
+
+1. **ValyxoHub** — Terminal-based developer environment
+2. **ValyxoScript** — Lightweight scripting language
+3. **ValyxoGPT** — AI Assistant integration
+4. **ValyxoApp** — Desktop application (when available)
+5. **Valyxo Web Platform** — Web-based components
+
+All components are subject to the same license terms.
 
 ================================================================================
 
@@ -199,7 +217,7 @@ END OF TERMS AND CONDITIONS
 
 ================================================================================
 
-Copyright 2025 NovaHub - Michał Kostkowski and Ignacy Ropiak
+Copyright 2025 VALYXO Project — Michał Stanistalkowski
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -212,3 +230,29 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+COMMERCIAL USE RESTRICTIONS APPLY
+See "COMMERCIAL USE RESTRICTION NOTICE" at the top of this file.
+
+================================================================================
+
+ADDITIONAL NOTES FOR VALYXO PROJECT:
+
+1. This project explicitly prohibits commercial use without explicit permission.
+
+2. You are free to:
+   - Use Valyxo for personal projects
+   - Use Valyxo for educational purposes
+   - Contribute to the project
+   - Fork the repository for non-commercial purposes
+   - Use components in non-profit organizations
+
+3. You need explicit commercial license to:
+   - Sell products/services using Valyxo
+   - Use Valyxo in a company (for-profit)
+   - Bundle Valyxo with commercial software
+   - Charge users for Valyxo functionality
+
+4. Contact: contact@valyxo.dev for commercial licensing
+
+================================================================================

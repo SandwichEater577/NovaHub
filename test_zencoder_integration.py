@@ -4,11 +4,11 @@ import sys
 sys.path.insert(0, 'src')
 
 try:
-    from Novahub import NovaGPTModule
+    from Valyxo import ValyxoGPTModule
     
     print("✓ NovaGPTModule imported successfully")
     
-    gpt = NovaGPTModule()
+    gpt = ValyxoGPTModule()
     print("✓ NovaGPTModule instance created")
     
     test_cases = [

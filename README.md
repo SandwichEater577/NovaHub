@@ -1,265 +1,352 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/SandwichEater577/NovaHub/main/NovaLogo.png" width="200">
-</p>
-⭐ NovaHub — Terminal OS + Scripting Language + AI Toolkit
+# 🚀 Valyxo — Ekosystem Programistyczny XXI Wieku
+
+> **Valyxo** = Terminal developer + AI Assistant + Ecosystem
+
+```
+     ██    ██  █████  ██       █████  ██   ██  ██████  
+     ██    ██ ██   ██ ██      ██   ██  ██ ██  ██    ██ 
+     ██    ██ ███████ ██      ███████   ███   ██    ██ 
+     ██    ██ ██   ██ ██      ██   ██   ██    ██    ██ 
+      ██████  ██   ██ ███████ ██   ██   ██     ██████  
+                                                        
+         Version 0.31+ | Powered by Zencoder AI
+```
+
+## 📋 Spis Treści
+
+1. [O Projekcie](#o-projekcie)
+2. [Architektura](#architektura)
+3. [Komponenty](#komponenty)
+4. [Instalacja](#instalacja)
+5. [Użytkowanie](#użytkowanie)
+6. [Roadmapa](#roadmapa)
+7. [Licencja](#licencja)
+
+---
+
+## 🎯 O Projekcie
+
+**Valyxo** to kompleksowy ekosystem dla programistów, składający się z trzech głównych komponentów:
+
+| Komponent | Typ | Opis |
+|-----------|-----|------|
+| **ValyxoHub** | Terminal CLI | Środowisko programistyczne w terminalu |
+| **ValyxoApp** | Aplikacja Desktop | Graficzny interfejs dla wizualizacji |
+| **ValyxoGPT** | AI Assistant | Asystent oparty na Zencoder AI |
+| **ValyxoScript** | Język | Lekki język skryptowy dla Valyxo |
+
+### 🌟 Cechy Valyxo
+
+- ✅ **Nowoczesna architektura** — modularny design, łatwy do rozszerzania
+- ✅ **Terminal-first** — pełna moc w CLI dla developerów
+- ✅ **AI-powered** — integracja z Zencoder AI
+- ✅ **Cross-platform** — Linux, Windows, macOS
+- ✅ **Open Source** — publiczny kod, transparent development
+- ✅ **Bezpieczny** — hash haseł, walidacja, ochrona danych
+
+---
+
+## 🏗️ Architektura
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                   VALYXO ECOSYSTEM                      │
+└─────────────────────────────────────────────────────────┘
+                            │
+         ┌──────────────────┼──────────────────┐
+         │                  │                  │
+    ┌────▼────┐        ┌────▼────┐      ┌─────▼─────┐
+    │ TERMINAL │        │  DESKTOP │      │    WEB    │
+    │(ValyxoHub)        │(ValyxoApp)     │(Platform) │
+    └──────────┘        └──────────┘      └───────────┘
+         │                  │                  │
+         ├──────────────────┼──────────────────┤
+         │                  │                  │
+    ┌────▼──────────────────▼──────────────────▼───┐
+    │           VALYXO CORE                       │
+    │  ┌─────────────────────────────────────┐   │
+    │  │ - Filesystem Operations             │   │
+    │  │ - ValyxoScript Runtime              │   │
+    │  │ - Job Management                    │   │
+    │  │ - Manual System                     │   │
+    │  │ - Color Theming                     │   │
+    │  └─────────────────────────────────────┘   │
+    └────┬──────────────────────────────────┬────┘
+         │                                  │
+    ┌────▼───────────────────────────┬─────▼────┐
+    │                                │           │
+┌───▼──────┐                   ┌─────▼──┐ ┌────▼─────┐
+│ValyxoGPT │                   │ Zencoder│ │ Database  │
+│(AI Core) │                   │   API   │ └──────────┘
+└──────────┘                   └─────────┘
+```
+
+### 🎯 Trzy Główne Warstwy
+
+#### 1️⃣ **ValyxoHub** — Terminal CLI
+- Aplikacja konsolowa dla programistów
+- Pełna moc edycji i uruchamiania kodu
+- Wsparcie dla wielu języków (ValyxoScript, JS, Python, Java)
+- AI Assistant w terminalu
+
+#### 2️⃣ **ValyxoApp** — Aplikacja Desktop
+- Interfejs graficzny (planowana, C++/Java/Rust)
+- Wizualizacja projektów
+- Integracja z ValyxoHub
+- Nie zastępuje terminal, tylko go uzupełnia
+
+#### 3️⃣ **Strona Internetowa** — Full Stack Platform
+- Frontend: HTML5 + CSS3 + JavaScript
+- Backend: Node.js + Express (REST API)
+- Baza danych: PostgreSQL/SQLite
+- Funkcje: Login, Register, Dashboard, AI Chat
 
-A lightweight terminal-based development environment featuring:
-✔ A virtual OS
-✔ The NovaScript programming language
-✔ Integrated AI assistant (NovaGPT)
-✔ File system, editor, job manager, manpages, and more.
+---
 
-🏷️ Badges
-![Version](https://img.shields.io/github/v/release/SandwichEater577/NovaHub)
-![Downloads](https://img.shields.io/github/downloads/SandwichEater577/NovaHub/total)
-![License](https://img.shields.io/github/license/SandwichEater577/NovaHub)
-![MadeWith](https://img.shields.io/badge/Made%20with-Python%203.13-blue)
+## 🔧 Komponenty
 
-🚀 About NovaHub
+### **ValyxoHub** (Terminal)
 
-NovaHub is a fully custom terminal environment and scripting platform, designed to feel like a mix of:
+```bash
+valyxohub                    # Uruchomienie terminalowego hubą
+```
 
-Linux terminal
+Komendy:
+- `mkdir <path>` — Tworzenie katalogów
+- `ls [path]` — Wylistowanie plików
+- `cd <path>` — Zmiana katalogu
+- `nano <file>` — Edytor plików
+- `run <file>` — Uruchomienie skryptu
+- `jobs` — Lista uruchomionych procesów
+- `kill <pid>` — Zabicie procesu
+- `enter ValyxoScript` — Wejście w interpreter skryptów
+- `enter ValyxoGPT` — Rozmowa z AI asystentem
+- `theme [list|set]` — Zarządzanie motywami
+- `man <command>` — Dokumentacja
 
-A lightweight OS
+### **ValyxoScript**
 
-Custom scripting language (NovaScript)
+Lekki język skryptowy:
 
-AI development assistant (NovaGPT)
+```valyxoscript
+set x = 10
+set y = 20
+set z = x + y
+print z
 
-Virtual file system with projects, tools, and job control
+if [z > 20] then [print "Wieksza!"] else [print "Mniejsza!"]
 
-All inside one Python-powered application.
+func add(a, b) {
+  set result = a + b
+  print result
+}
+```
 
-It includes:
+### **ValyxoGPT**
 
-A full virtual filesystem under ~/NovaHubDocuments
+AI Assistant w terminalu:
 
-A working nano-style text editor
+```bash
+> enter ValyxoGPT
+> How do I define a function in ValyxoScript?
+AI: ValyxoScript functions: Use 'func name(params) { body }'...
+```
 
-A robust man page system
+---
 
-Background job execution (run file.ns &)
+## 📦 Instalacja
 
-Auto-suggestions
+### Wymagania
+- Python 3.8+
+- Git
+- npm (dla backendu strony)
 
-A modular architecture for future tools (NovaStore, NovaTools, etc.)
+### Krok 1: Klonowanie repozytorium
 
-NovaHub is built for developers, learners, and anyone who wants their own customizable terminal OS.
+```bash
+git clone https://github.com/yourusername/valyxo.git
+cd valyxo
+```
+
+### Krok 2: Instalacja zależności
+
+```bash
+# Terminal CLI
+pip install -r requirements.txt
+
+# Strona internetowa (opcjonalnie)
+cd website
+npm install
+```
+
+### Krok 3: Uruchomienie ValyxoHub
+
+```bash
+python src/Valyxo.py
+```
+
+---
+
+## 🎮 Użytkowanie
+
+### Uruchamianie ValyxoHub
+
+```bash
+python src/Valyxo.py
+```
+
+Powinieneś zobaczyć:
+```
+Welcome to Valyxo v0.31 (Zencoder Integrated)
+valyxo:~> 
+```
+
+### Podstawowe polecenia
+
+```bash
+# Tworzenie projektu
+mkdir Projects/MyProject
+cd Projects/MyProject
+
+# Tworzenie pliku
+nano main.vs
 
-📦 Download
-👉 Download the latest NovaHub.exe:
+# Uruchomienie
+run main.vs
+
+# Rozmowa z AI
+enter ValyxoGPT
+
+# Pomoc
+man valyxohub
+```
 
-➡ https://github.com/SandwichEater577/NovaHub/releases/latest
+---
 
-No Python required.
-Just download and run.
+## 🗺️ Roadmapa
 
-🧰 Features
-🌐 NovaHub Shell
+### ✅ v0.31 (Obecna)
+- [x] Modularny kod Valyxo
+- [x] Usunięcie legacy NovaHub
+- [x] Clean architektura
+- [ ] Pełna dokumentacja
 
-A minimalistic terminal OS with:
+### 🔄 v0.32 (Planowana)
+- [ ] ValyxoApp (Desktop Application)
+- [ ] Rozszerzone moduły ValyxoScript
+- [ ] Wtyczki (plugin system)
+- [ ] Performance optimization
 
-mkdir, ls, cd, cat, grep
+### 📅 v0.33+ (Future)
+- [ ] Web IDE (Visual Studio Code-like)
+- [ ] Collaboration tools
+- [ ] Mobile app
+- [ ] Cloud storage integration
 
-nano editor
+---
 
-man documentation system
+## 📂 Struktura Projektu
 
-run foreground / run file & background execution
+```
+valyxo/
+├── src/
+│   ├── Valyxo.py                 (Entry point)
+│   ├── valyxo/
+│   │   ├── core/                 (Core modules)
+│   │   │   ├── colors.py
+│   │   │   ├── constants.py
+│   │   │   ├── utils.py
+│   │   │   ├── filesystem.py
+│   │   │   ├── gpt.py
+│   │   │   ├── jobs.py
+│   │   │   └── man.py
+│   │   ├── shell/
+│   │   ├── editor/
+│   │   └── __init__.py
+│   └── tests/
+├── website/
+│   ├── frontend/
+│   │   ├── index.html
+│   │   ├── css/
+│   │   └── js/
+│   ├── backend/
+│   │   └── server.js
+│   └── package.json
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── MANUAL.md
+│   └── API.md
+├── README.md
+├── LICENSE
+└── requirements.txt
+```
 
-jobs and kill
+---
 
-Settings system (colors, suggestions, etc.)
+## 🔒 Bezpieczeństwo
 
-Auto-correct suggestions for commands
+Valyxo jest zbudowany z myślą o bezpieczeństwie:
 
-🧪 NovaScript Language
+- ✅ **Haszowanie haseł** — bcrypt/argon2
+- ✅ **Walidacja danych** — sanitizacja inputów
+- ✅ **HTTPS** — szyfrowana komunikacja
+- ✅ **Brak plaintext secrets** — environment variables
+- ✅ **SQL Injection protection** — parameterized queries
+- ✅ **CSRF Protection** — token validation
+- ✅ **XSS Prevention** — output escaping
 
-NovaHub’s custom programming language.
+---
 
-Supports:
+## 📚 Dokumentacja
 
-Variables (set x = 5)
+- **[VALYXO_ARCHITECTURE.md](./VALYXO_ARCHITECTURE.md)** — Szczegółowa architektura
+- **[VALYXO_QUICK_START.md](./VALYXO_QUICK_START.md)** — Quick reference
+- **docs/API.md** — REST API documentation
+- **docs/MANUAL.md** — Kompletny manual użytkownika
 
-Expressions (x + 2)
+---
 
-Strings ("Hello")
+## 🤝 Contributing
 
-Printing (print x)
+Zapraszamy do contribucji! Aby zacząć:
 
-One-line conditional logic:
+1. Fork repozytorium
+2. Utwórz branch (`git checkout -b feature/NewFeature`)
+3. Commit zmiany (`git commit -m 'Add NewFeature'`)
+4. Push do brancha (`git push origin feature/NewFeature`)
+5. Otwórz Pull Request
 
-if [x < 10] then [print x] else [print "big"]
+---
 
+## 📄 Licencja
 
-Comments (# this is a comment)
+Valyxo jest dostępny na licencji **MIT z ograniczeniami komercyjnymi**.
 
-Integrated AI helper inside NovaScript:
+Szczegóły: [LICENSE](./LICENSE)
 
-N@"create a function that calculates velocity"
+---
 
-🤖 NovaGPT
+## 📞 Kontakt
 
-AI chat system inside NovaHub.
+- 🐙 GitHub: [github.com/...](https://github.com)
+- 📧 Email: contact@valyxo.dev
+- 🌐 Website: valyxo.dev (planowana)
 
-Two modes:
+---
 
-NovaHub → NovaGPT:
-Ask questions, brainstorm ideas, get help.
+## 🌟 Podziękowania
 
-NovaScript → NovaGPT (code only):
-N@"write code" generates NovaScript code automatically.
+Dziękujemy:
+- **Zencoder AI** — za integrację AI
+- Społeczności open-source
+- Wszystkim kontrybutorem
 
-(Currently simulated; optional real API support planned.)
+---
 
-📝 Nano Editor
+**Valyxo v0.31+** — The Developer's Ecosystem
 
-A file editor built into NovaHub.
+_Zbudowanie przez programistów, dla programistów._
 
-No line numbers (clean & minimal)
-
-Saves automatically on exit
-
-Can create new files with language extension selection
-
-Used mainly for NovaScript development
-
-📚 Manpage System
-
-Like Linux:
-
-man NovaHub
-man NovaScript
-man nano
-man mkdir
-man lang
-man command
-
-
-Pages include:
-
-COMMAND
-
-HOW TO USE
-
-EXAMPLE
-
-DESCRIPTION
-
-LANGUAGE
-
-NOTES
-
-WARNINGS
-
-SEE ALSO
-
-With a full pager:
-SPACE = next page, ENTER = next line, q = quit
-
-🛠️ Installation
-Option A — Run the Windows EXE
-
-Download the latest release:
-👉 https://github.com/SandwichEater577/NovaHub/releases/latest
-
-Run:
-
-NovaHub.exe
-
-
-Done!
-NovaHub creates the directory:
-
-C:\Users\<you>\NovaHubDocuments
-
-Option B — Run from source (requires Python 3.11+)
-
-Clone the repo:
-
-git clone https://github.com/SandwichEater577/NovaHub.git
-cd NovaHub/src
-python NovaHub.py
-
-🔤 Hello World in NovaScript
-
-Create a file:
-
-nano Hello.ns
-
-
-Write:
-
-set msg = "Hello World"
-print msg
-exit
-
-
-Run it:
-
-run Hello.ns
-
-
-Output:
-
-Hello World
-
-🧪 Example Commands
-NovaHub=> mkdir Projects
-NovaHub=> cd Projects
-NovaHub=> nano main.ns
-NovaHub=> run main.ns
-NovaHub=> run server.ns &
-NovaHub=> jobs
-NovaHub=> kill 1
-NovaHub=> man NovaScript
-
-🌱 Roadmap (Upcoming Versions)
-v0.4
-
-NovaScript loops (for, while)
-
-Functions
-
-File import system
-
-NovaGPT real API support (optional)
-
-Improved nano editing commands
-
-v0.5
-
-Plugin system (NovaTools)
-
-NovaHub Store (novapkg)
-
-Themes for terminal
-
-FS permissions
-
-1.0
-
-Stable NovaScript compiler
-
-Package manager
-
-Editor improvements
-
-Real AI-assisted development
-
-Automatic updates
-
-🤝 Contributing
-
-PRs welcome!
-Please open an issue first to discuss features or bugs.
-
-📜 License
-
-MIT License — free to use, modify, and distribute.
-
-🙌 Credits
-
-Created by SandwichEater577
-Built with ❤️ in Python.
+```
+Made with ❤️ in Poland
+```
