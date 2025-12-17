@@ -4,7 +4,7 @@ from typing import Dict, List, Any
 APP_NAME: str = "Valyxo"
 VERSION: str = "Valyxo v0.41 (Zencoder Integrated)"
 
-HOME: str = os.path.expanduser("~")
+HOME: str = os.getcwd()
 ROOT_FOLDER_NAME: str = "ValyxoDocuments"
 ROOT_DIR: str = os.path.join(HOME, ROOT_FOLDER_NAME)
 PROJECTS_DIR: str = os.path.join(ROOT_DIR, "Projects")
