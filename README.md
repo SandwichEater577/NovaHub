@@ -65,16 +65,27 @@ Everything runs silently in the background.
 
 ---
 
+## 🎯 What's New in v0.41
+
+- **Complete ValyxoHub Rewrite** — Full REPL loop with dynamic prompts, proper error handling, and built-in help
+- **Improved ValyxoScript** — Line numbers in errors, helpful suggestions, better variable/expression handling
+- **Enhanced AI Assistant** — Intelligent query categorization with specialized responses for different domains
+- **Better Web Platform** — New stats section, testimonials, improved styling and responsiveness
+- **Linux-First** — Cross-platform path handling, POSIX compatibility verified
+- **Professional Error Messages** — Context-aware errors with actionable suggestions
+
 ## 🌟 Key Features
 
 - ✅ **Modern Architecture** — Modular, scalable, and extensible design
-- ✅ **Terminal-First** — Full power for developers in CLI
+- ✅ **Terminal-First** — Full power for developers in CLI with REPL
 - ✅ **AI-Powered** — Integrated Zencoder AI for intelligent assistance
 - ✅ **Cross-Platform** — Linux, Windows, macOS support
 - ✅ **Open Source** — Transparent development, community-driven
 - ✅ **Secure** — Password hashing, input validation, data protection
 - ✅ **Multi-Language** — Support for ValyxoScript, JavaScript, Python, Java
 - ✅ **Project Management** — Built-in tools for file operations and job management
+- ✅ **Error Guidance** — Clear error messages with line numbers and hints
+- ✅ **Interactive** — Full REPL with dynamic prompts and real-time feedback
 
 ---
 
