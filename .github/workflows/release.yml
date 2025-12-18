@@ -1,0 +1,166 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release (e.g., 0.41.0)"
+        required: true
+        default: "0.41.0"
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install server dependencies
+        run: npm install
+        working-directory: server
+
+      - name: Install desktop dependencies
+        run: npm install
+        working-directory: desktop
+
+      - name: Build Windows installer
+        run: npm run build:win
+        working-directory: desktop
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Windows artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-installers
+          path: |
+            desktop/dist/*.exe
+            desktop/dist/*.msi
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install server dependencies
+        run: npm install
+        working-directory: server
+
+      - name: Install desktop dependencies
+        run: npm install
+        working-directory: desktop
+
+      - name: Build macOS installer
+        run: npm run build:mac
+        working-directory: desktop
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload macOS artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-installers
+          path: |
+            desktop/dist/*.dmg
+            desktop/dist/*.zip
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install server dependencies
+        run: npm install
+        working-directory: server
+
+      - name: Install desktop dependencies
+        run: npm install
+        working-directory: desktop
+
+      - name: Build Linux installer
+        run: npm run build:linux
+        working-directory: desktop
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Linux artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-installers
+          path: |
+            desktop/dist/*.AppImage
+            desktop/dist/*.deb
+            desktop/dist/*.rpm
+
+  create-release:
+    needs: [build-windows, build-macos, build-linux]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Get version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: Valyxo v${{ steps.version.outputs.version }}
+          draft: false
+          prerelease: false
+          files: |
+            artifacts/windows-installers/*
+            artifacts/macos-installers/*
+            artifacts/linux-installers/*
+          body: |
+            ## Valyxo v${{ steps.version.outputs.version }}
+
+            ### Downloads
+
+            | Platform | Download |
+            |----------|----------|
+            | Windows | `Valyxo-Setup-${{ steps.version.outputs.version }}.exe` |
+            | macOS | `Valyxo-${{ steps.version.outputs.version }}.dmg` |
+            | Linux | `Valyxo-${{ steps.version.outputs.version }}.AppImage` |
+
+            ### Installation
+
+            **Windows:** Download and run the .exe installer
+            **macOS:** Download the .dmg, open it, and drag Valyxo to Applications
+            **Linux:** Download the .AppImage, make it executable (`chmod +x`), and run
+
+            ---
+
+            Full changelog: https://github.com/SandwichEater577/Valyxo/blob/main/CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
