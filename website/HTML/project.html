@@ -314,14 +314,7 @@
 
     <script src="../JavaScript/animations.js"></script>
     <script>
-      // Fetch GitHub stats and show fake data if below threshold
-      const STAR_THRESHOLD = 15;
-      const FAKE_STATS = {
-        stars: 17,
-        forks: 4,
-        issues: 2,
-      };
-
+      // Fetch real GitHub stats
       async function fetchGitHubStats() {
         try {
           const response = await fetch(
@@ -330,44 +323,20 @@
           if (!response.ok) throw new Error("API error");
           const data = await response.json();
 
-          const realStars = data.stargazers_count || 0;
-          const realForks = data.forks_count || 0;
-          const realIssues = data.open_issues_count || 0;
+          const stars = data.stargazers_count || 0;
+          const forks = data.forks_count || 0;
+          const issues = data.open_issues_count || 0;
 
-          // If real stars are below threshold, show fake stats
-          if (realStars < STAR_THRESHOLD) {
-            document.getElementById(
-              "star-count"
-            ).textContent = `${FAKE_STATS.stars} stars`;
-            document.getElementById(
-              "fork-count"
-            ).textContent = `${FAKE_STATS.forks} forks`;
-            document.getElementById(
-              "issue-count"
-            ).textContent = `${FAKE_STATS.issues} issues`;
-          } else {
-            // Show real stats
-            document.getElementById(
-              "star-count"
-            ).textContent = `${realStars} stars`;
-            document.getElementById(
-              "fork-count"
-            ).textContent = `${realForks} forks`;
-            document.getElementById(
-              "issue-count"
-            ).textContent = `${realIssues} issues`;
-          }
-        } catch (error) {
-          // On error, show fake stats
-          document.getElementById(
-            "star-count"
-          ).textContent = `${FAKE_STATS.stars} stars`;
-          document.getElementById(
-            "fork-count"
-          ).textContent = `${FAKE_STATS.forks} forks`;
+          document.getElementById("star-count").textContent = `${stars} stars`;
+          document.getElementById("fork-count").textContent = `${forks} forks`;
           document.getElementById(
             "issue-count"
-          ).textContent = `${FAKE_STATS.issues} issues`;
+          ).textContent = `${issues} issues`;
+        } catch (error) {
+          // On error, show zeros
+          document.getElementById("star-count").textContent = "0 stars";
+          document.getElementById("fork-count").textContent = "0 forks";
+          document.getElementById("issue-count").textContent = "0 issues";
         }
       }
 
