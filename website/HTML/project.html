@@ -245,11 +245,8 @@
       <!-- Contributors -->
       <div class="repo-contributors">
         <h3>Contributors</h3>
-        <div class="contributors-list">
-          <div class="contributor">
-            <div class="contributor-avatar">MK</div>
-            <span>Michał Kostkowski</span>
-          </div>
+        <div class="contributors-list" id="contributors-list">
+          <!-- Will be populated by JavaScript -->
         </div>
       </div>
 
@@ -340,7 +337,39 @@
         }
       }
 
+      // Fetch real contributors
+      async function fetchContributors() {
+        const container = document.getElementById("contributors-list");
+        try {
+          const response = await fetch(
+            "https://api.github.com/repos/SandwichEater577/Valyxo/contributors"
+          );
+          if (!response.ok) throw new Error("API error");
+          const contributors = await response.json();
+
+          container.innerHTML = contributors
+            .map(
+              (c) => `
+            <a href="${c.html_url}" target="_blank" class="contributor">
+              <img src="${c.avatar_url}" alt="${c.login}" class="contributor-avatar-img" />
+              <span>${c.login}</span>
+              <span class="contributor-commits">${c.contributions} commits</span>
+            </a>
+          `
+            )
+            .join("");
+        } catch (error) {
+          container.innerHTML = `
+            <div class="contributor">
+              <div class="contributor-avatar">?</div>
+              <span>Unable to load contributors</span>
+            </div>
+          `;
+        }
+      }
+
       fetchGitHubStats();
+      fetchContributors();
     </script>
   </body>
 </html>

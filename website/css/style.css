@@ -1505,6 +1505,12 @@ footer::before {
   padding: 8px 16px;
   background: rgba(255, 255, 255, 0.03);
   border-radius: var(--radius);
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.contributor:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .contributor-avatar {
@@ -1520,9 +1526,22 @@ footer::before {
   color: #fff;
 }
 
+.contributor-avatar-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .contributor span {
   font-size: 0.9rem;
   color: var(--text-secondary);
+}
+
+.contributor-commits {
+  font-size: 0.75rem !important;
+  color: var(--text-muted) !important;
+  opacity: 0.7;
 }
 
 /* Languages */
