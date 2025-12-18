@@ -158,10 +158,8 @@ class ValyxoShell:
             self._handle_theme(args)
         elif cmd == "settings":
             self._handle_settings(args)
-        elif cmd in ["enter valyxoscript", "enter vscript"]:
-            self._enter_valyxoscript()
-        elif cmd in ["enter valyxogpt", "enter vgpt"]:
-            self._enter_valyxogpt()
+        elif cmd == "enter":
+            self._handle_enter(args)
         else:
             print(get_error_banner(f"Unknown command: {cmd}. Type '-help' for available commands.", self.settings))
 
@@ -195,6 +193,17 @@ class ValyxoShell:
 ╰─────────────────────────────────────────────────────────────╯
 """
         print(help_text)
+
+    def _handle_enter(self, args: str):
+        """Handle enter command to switch modes."""
+        mode = args.lower().strip()
+        if mode in ["valyxoscript", "vscript", "vs"]:
+            self._enter_valyxoscript()
+        elif mode in ["valyxogpt", "vgpt", "gpt"]:
+            self._enter_valyxogpt()
+        else:
+            print(get_error_banner("Usage: enter <ValyxoScript|ValyxoGPT>", self.settings))
+            print(get_info_banner("  Aliases: vscript, vs, vgpt, gpt", self.settings))
 
     def _handle_man(self, cmd: str):
         if not cmd:

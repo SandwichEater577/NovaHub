@@ -64,7 +64,7 @@ def get_startup_banner(settings: Optional[dict] = None) -> str:
         Formatted startup banner string
     """
     logo = VALYXO_LOGO
-    version_line = "    Version 0.41 | Powered by Zencoder AI"
+    version_line = "    Version 0.5.1 | Powered by Zencoder AI"
     
     if settings and not settings.get("colors", True):
         return f"\n{logo}\n{version_line}\n"
@@ -94,7 +94,7 @@ def get_component_banner(component: str, settings: Optional[dict] = None) -> str
     return f"\n{color(logo, Colors.ACCENT, settings)}\n"
 
 
-def get_welcome_message(app_name: str = "Valyxo", version: str = "0.41", 
+def get_welcome_message(app_name: str = "Valyxo", version: str = "0.5.1", 
                        settings: Optional[dict] = None) -> str:
     """Get formatted welcome message.
     

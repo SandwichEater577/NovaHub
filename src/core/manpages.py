@@ -62,6 +62,33 @@ class ValyxoManSystem:
                 with open(filename, "w", encoding="utf-8") as f:
                     f.write(self._format_manpage(content))
 
+    def get_page(self, name: str) -> str:
+        """Get a manual page by name.
+        
+        Args:
+            name: The name of the manual page to retrieve
+            
+        Returns:
+            The formatted manual page content, or None if not found
+        """
+        # First check in-memory pages
+        key = name.lower()
+        if key in self.pages:
+            return self._format_manpage(self.pages[key])
+        
+        # Check for .man file
+        filename = os.path.join(const.MAN_DIR, key + ".man")
+        if os.path.exists(filename):
+            with open(filename, "r", encoding="utf-8") as f:
+                return f.read()
+        
+        # Try without extension match
+        for page_name in self.pages:
+            if page_name.lower() == key:
+                return self._format_manpage(self.pages[page_name])
+        
+        return None
+
     @staticmethod
     def _format_manpage(dic: Dict[str, str]) -> str:
         s = []
