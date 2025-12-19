@@ -1,12 +1,7 @@
-// Valyxo Website - Animations & Effects (TypeScript)
-
-// Type definitions for global window properties if needed
-interface TiltCard extends HTMLElement {
-  style: CSSStyleDeclaration;
-}
+// Valyxo Website - Animations & Effects
 
 // Scroll reveal animation
-const observerOptions: IntersectionObserverInit = {
+const observerOptions = {
   threshold: 0.1,
   rootMargin: "0px 0px -50px 0px",
 };
@@ -26,7 +21,7 @@ document.querySelectorAll(".reveal").forEach((el) => {
 });
 
 // Smooth parallax effect on hero section
-const hero = document.querySelector(".hero") as HTMLElement | null;
+const hero = document.querySelector(".hero");
 if (hero) {
   window.addEventListener("scroll", () => {
     const scroll = window.scrollY;
@@ -48,7 +43,7 @@ const createMouseGlow = () => {
   let glowX = 0,
     glowY = 0;
 
-  document.addEventListener("mousemove", (e: MouseEvent) => {
+  document.addEventListener("mousemove", (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
   });
@@ -69,8 +64,8 @@ if (window.matchMedia("(min-width: 768px)").matches) {
 }
 
 // Feature card mouse tracking
-document.querySelectorAll<HTMLElement>(".feature-card").forEach((card) => {
-  card.addEventListener("mousemove", (e: MouseEvent) => {
+document.querySelectorAll(".feature-card").forEach((card) => {
+  card.addEventListener("mousemove", (e) => {
     const rect = card.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
@@ -79,12 +74,8 @@ document.querySelectorAll<HTMLElement>(".feature-card").forEach((card) => {
   });
 });
 
-// Smooth number counter for stats (Typed)
-function animateCounter(
-  element: HTMLElement,
-  target: number,
-  duration: number = 2000
-) {
+// Smooth number counter for stats
+function animateCounter(element, target, duration = 2000) {
   let start = 0;
   const increment = target / (duration / 16);
 
@@ -101,8 +92,8 @@ function animateCounter(
 }
 
 // Tilt effect for cards
-document.querySelectorAll<HTMLElement>("[data-tilt]").forEach((card) => {
-  card.addEventListener("mousemove", (e: MouseEvent) => {
+document.querySelectorAll("[data-tilt]").forEach((card) => {
+  card.addEventListener("mousemove", (e) => {
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -121,12 +112,7 @@ document.querySelectorAll<HTMLElement>("[data-tilt]").forEach((card) => {
 });
 
 // Typing animation for terminal
-interface TerminalLine {
-  text: string;
-  type: "command" | "success" | "info" | "error";
-}
-
-const terminalLines: TerminalLine[] = [
+const terminalLines = [
   { text: "$ valyxo init my-project", type: "command" },
   { text: "✓ Project created successfully", type: "success" },
   { text: "$ valyxo run", type: "command" },
@@ -135,21 +121,16 @@ const terminalLines: TerminalLine[] = [
 ];
 
 // Create cursor element
-let cursor: HTMLElement | null = null;
-function createCursor(): HTMLElement {
+let cursor = null;
+function createCursor() {
   cursor = document.createElement("span");
   cursor.className = "terminal-cursor";
   cursor.textContent = "▌";
   return cursor;
 }
 
-async function typeWriter(
-  element: HTMLElement,
-  text: string,
-  speed: number = 50,
-  codeElement: HTMLElement | null
-) {
-  return new Promise<void>((resolve) => {
+async function typeWriter(element, text, speed = 50, codeElement) {
+  return new Promise((resolve) => {
     let i = 0;
     function type() {
       if (i < text.length) {
@@ -169,9 +150,7 @@ async function typeWriter(
 }
 
 async function animateTerminal() {
-  const codeElement = document.querySelector<HTMLElement>(
-    ".window-content code"
-  );
+  const codeElement = document.querySelector(".window-content code");
   if (!codeElement) return;
 
   codeElement.innerHTML = "";
@@ -229,4 +208,4 @@ if (codeWindow) {
   terminalObserver.observe(codeWindow);
 }
 
-console.log("🚀 Valyxo animations loaded (TypeScript)");
+console.log("🚀 Valyxo animations loaded");

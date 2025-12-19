@@ -1,24 +1,21 @@
-// Valyxo Website TypeScript
+// Valyxo Website
 // Main entry point
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Valyxo website loaded (TypeScript)");
+  console.log("Valyxo website loaded");
 
   // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener(
-      "click",
-      function (this: HTMLAnchorElement, e: Event) {
-        const href = this.getAttribute("href");
-        if (href) {
-          const target = document.querySelector(href);
-          if (target) {
-            e.preventDefault();
-            target.scrollIntoView({ behavior: "smooth" });
-          }
+    anchor.addEventListener("click", function (e) {
+      const href = this.getAttribute("href");
+      if (href) {
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth" });
         }
       }
-    );
+    });
   });
 
   // Add active class to current nav link

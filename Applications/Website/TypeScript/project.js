@@ -1,27 +1,8 @@
-// Valyxo Project Page Logic (TypeScript)
-// Handles WASM loading and GitHub API interaction
-
-// Type for the WASM module
-interface WasmModule {
-  main_js: () => Promise<void>;
-}
-
-// Fallback logic interfaces
-interface RepoStats {
-  stargazers_count: number;
-  forks_count: number;
-  open_issues_count: number;
-}
-
-interface Contributor {
-  login: string;
-  avatar_url: string;
-  html_url: string;
-  contributions: number;
-}
+// Valyxo Project Page Logic
+// Handles GitHub API interaction for stats, contributors, and languages
 
 // Color map for languages
-const LANGUAGE_COLORS: Record<string, string> = {
+const LANGUAGE_COLORS = {
   Python: "#3572A5",
   Rust: "#dea584",
   JavaScript: "#f1e05a",
@@ -32,28 +13,12 @@ const LANGUAGE_COLORS: Record<string, string> = {
   Shell: "#89e051",
 };
 
-// Main execution - WASM disabled until built
+// Main execution
 async function run() {
-  // Note: WASM integration is ready but module needs to be compiled first
-  // Run: cd Applications/Website/wasm && wasm-pack build --target web
-  // Then uncomment the WASM code below
-
-  // For now, use the TypeScript fallback directly
   fallbackLogic();
-
-  /* WASM code (uncomment after building):
-  try {
-    const wasm = await import("../wasm/pkg/valyxo_web.js");
-    await wasm.default();
-    await wasm.main_js();
-  } catch (e) {
-    console.warn("WASM failed:", e);
-    fallbackLogic();
-  }
-  */
 }
 
-// Executed if WASM fails or is not present
+// Fetch all data
 function fallbackLogic() {
   fetchGitHubStats();
   fetchContributors();
@@ -66,7 +31,7 @@ async function fetchGitHubStats() {
       "https://api.github.com/repos/SandwichEater577/Valyxo"
     );
     if (!response.ok) throw new Error("API error");
-    const data = (await response.json()) as RepoStats;
+    const data = await response.json();
 
     updateText("star-count", `${data.stargazers_count} stars`);
     updateText("fork-count", `${data.forks_count} forks`);
@@ -87,7 +52,7 @@ async function fetchContributors() {
       "https://api.github.com/repos/SandwichEater577/Valyxo/contributors"
     );
     if (!response.ok) throw new Error("API error");
-    const contributors = (await response.json()) as Contributor[];
+    const contributors = await response.json();
 
     const filtered = contributors.filter(
       (c) => c.login.toLowerCase() !== "michalmazur"
@@ -119,7 +84,7 @@ async function fetchLanguages() {
       "https://api.github.com/repos/SandwichEater577/Valyxo/languages"
     );
     if (!response.ok) throw new Error("API error");
-    const languages = (await response.json()) as Record<string, number>;
+    const languages = await response.json();
 
     const totalBytes = Object.values(languages).reduce((a, b) => a + b, 0);
     const langBar = document.getElementById("language-bar");
@@ -157,7 +122,7 @@ async function fetchLanguages() {
   }
 }
 
-function updateText(id: string, text: string) {
+function updateText(id, text) {
   const el = document.getElementById(id);
   if (el) el.textContent = text;
 }
