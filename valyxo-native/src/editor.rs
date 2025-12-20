@@ -10,7 +10,7 @@ pub struct Editor;
 
 impl Editor {
     /// Show the editor for a buffer
-    pub fn show(ui: &mut Ui, buffer: &mut Buffer, syntax: Arc<SyntaxHighlighter>) {
+    pub fn show(ui: &mut Ui, buffer: &mut Buffer, syntax: Arc<SyntaxHighlighter>, theme: &crate::theme::Theme) {
         let font_id = FontId::monospace(14.0);
         let line_height = 20.0;
         let char_width = 8.4; // Approximate monospace character width
@@ -25,7 +25,7 @@ impl Editor {
         let rect = response.rect;
         
         // Background
-        painter.rect_filled(rect, 0.0, Color32::from_rgb(30, 30, 30));
+        painter.rect_filled(rect, 0.0, theme.background_color());
         
         // Handle scrolling
         if response.hovered() {
@@ -36,11 +36,14 @@ impl Editor {
         
         // Draw gutter (line numbers)
         let gutter_rect = Rect::from_min_size(rect.min, Vec2::new(gutter_width, rect.height()));
-        painter.rect_filled(gutter_rect, 0.0, Color32::from_rgb(35, 35, 35));
+        painter.rect_filled(gutter_rect, 0.0, Color32::from_rgb(theme.gutter[0], theme.gutter[1], theme.gutter[2]));
         
-        // Get highlighted lines
-        let text = buffer.text();
-        let highlights = syntax.highlight(&text, &buffer.language);
+        // Get highlighted lines from cache or recompute
+        if buffer.cached_highlights.is_none() {
+            let text = buffer.text();
+            buffer.cached_highlights = Some(syntax.highlight(&text, &buffer.language));
+        }
+        let highlights = buffer.cached_highlights.as_ref().unwrap();
         
         // Draw lines
         for i in 0..visible_lines {
@@ -116,7 +119,7 @@ impl Editor {
                         Vec2::new(rect.width() - gutter_width, line_height),
                     ),
                     0.0,
-                    Color32::from_rgba_unmultiplied(255, 255, 255, 10),
+                    Color32::from_rgba_unmultiplied(theme.line_highlight[0], theme.line_highlight[1], theme.line_highlight[2], 40),
                 );
             }
         }
@@ -127,7 +130,7 @@ impl Editor {
                 egui::pos2(rect.min.x + gutter_width, rect.min.y),
                 egui::pos2(rect.min.x + gutter_width, rect.max.y),
             ],
-            egui::Stroke::new(1.0, Color32::from_rgb(50, 50, 50)),
+            egui::Stroke::new(1.0, Color32::from_rgb(theme.border[0], theme.border[1], theme.border[2])),
         );
         
         // Handle keyboard input

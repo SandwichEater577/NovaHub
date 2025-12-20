@@ -19,14 +19,24 @@
     },
     "bundle": {
       "active": true,
-      "targets": "all",
+      "targets": ["nsis"],
       "identifier": "com.valyxo.desktop",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
         "icons/icon.icns",
         "icons/icon.ico"
-      ]
+      ],
+      "windows": {
+        "nsis": {
+          "installerIcon": "icons/icon.ico",
+          "headerImage": "../installer-assets/header.bmp",
+          "sidebarImage": "../installer-assets/sidebar.bmp",
+          "installMode": "currentUser",
+          "license": "../../LICENSE",
+          "languages": ["English"]
+        }
+      }
     },
     "security": {
       "csp": null

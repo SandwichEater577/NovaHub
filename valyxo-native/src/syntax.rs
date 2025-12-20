@@ -28,7 +28,7 @@ impl SyntaxHighlighter {
             .or_else(|| self.syntax_set.find_syntax_by_extension(language.to_lowercase().as_str()))
             .unwrap_or_else(|| self.syntax_set.find_syntax_plain_text());
         
-        let theme = &self.theme_set.themes["base16-ocean.dark"];
+        let theme = &self.theme_set.themes["Solarized (dark)"];
         let mut highlighter = HighlightLines::new(syntax, theme);
         
         let mut result = Vec::new();
@@ -72,9 +72,10 @@ impl SyntaxHighlighter {
 
 /// Convert syntect style to egui Color32
 fn style_to_color32(style: &Style) -> Color32 {
-    Color32::from_rgb(
-        style.foreground.r,
-        style.foreground.g,
-        style.foreground.b,
-    )
+    // Boost brightness and saturation for "alive" colors
+    let r = (style.foreground.r as f32 * 1.2).min(255.0) as u8;
+    let g = (style.foreground.g as f32 * 1.2).min(255.0) as u8;
+    let b = (style.foreground.b as f32 * 1.2).min(255.0) as u8;
+    
+    Color32::from_rgb(r, g, b)
 }

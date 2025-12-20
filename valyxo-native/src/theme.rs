@@ -31,17 +31,17 @@ impl Theme {
     pub fn dark() -> Self {
         Self {
             name: "Dark".to_string(),
-            background: [30, 30, 30],
+            background: [24, 24, 28],
             foreground: [212, 212, 212],
-            accent: [0, 122, 204],
-            selection: [38, 79, 120],
-            gutter: [35, 35, 35],
-            line_highlight: [40, 40, 40],
-            border: [50, 50, 50],
-            sidebar: [33, 33, 33],
-            tab_active: [45, 45, 45],
-            tab_inactive: [30, 30, 30],
-            status_bar: [0, 122, 204],
+            accent: [0, 210, 255], // Electric Blue
+            selection: [40, 60, 80],
+            gutter: [32, 32, 36],
+            line_highlight: [35, 35, 40],
+            border: [45, 45, 52],
+            sidebar: [28, 28, 32],
+            tab_active: [35, 35, 40],
+            tab_inactive: [24, 24, 28],
+            status_bar: [0, 210, 255],
         }
     }
     
@@ -116,6 +116,24 @@ impl Theme {
             status_bar: [136, 192, 208],
         }
     }
+
+    /// Midnight theme (OLED Pure Black)
+    pub fn midnight() -> Self {
+        Self {
+            name: "Midnight".to_string(),
+            background: [4, 4, 6],
+            foreground: [255, 255, 255],
+            accent: [0, 210, 255], // Electric Blue
+            selection: [40, 60, 100],
+            gutter: [10, 10, 12],
+            line_highlight: [20, 20, 25],
+            border: [35, 35, 40],
+            sidebar: [10, 10, 12],
+            tab_active: [25, 25, 30],
+            tab_inactive: [4, 4, 6],
+            status_bar: [0, 210, 255],
+        }
+    }
     
     /// Apply theme to egui context
     pub fn apply(&self, ctx: &Context) {
@@ -150,6 +168,7 @@ impl Theme {
 /// Available themes
 pub fn available_themes() -> Vec<Theme> {
     vec![
+        Theme::midnight(),
         Theme::dark(),
         Theme::light(),
         Theme::monokai(),

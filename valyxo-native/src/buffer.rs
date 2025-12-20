@@ -4,6 +4,7 @@ use ropey::Rope;
 use std::collections::HashMap;
 use std::path::PathBuf;
 use anyhow::Result;
+use eframe::egui::Color32;
 
 /// Unique buffer identifier
 pub type BufferId = u64;
@@ -51,6 +52,9 @@ pub struct Buffer {
     
     /// Cached line count
     pub line_count: usize,
+    
+    /// Cached syntax highlights for rendering performance
+    pub cached_highlights: Option<Vec<Vec<(String, Color32)>>>,
 }
 
 #[derive(Clone)]
@@ -81,6 +85,7 @@ impl Buffer {
             undo_stack: Vec::new(),
             redo_stack: Vec::new(),
             line_count: 1,
+            cached_highlights: None,
         }
     }
     
@@ -111,6 +116,7 @@ impl Buffer {
             undo_stack: Vec::new(),
             redo_stack: Vec::new(),
             line_count,
+            cached_highlights: None,
         })
     }
     
@@ -155,6 +161,7 @@ impl Buffer {
         self.rope.insert(char_idx, text);
         self.modified = true;
         self.line_count = self.rope.len_lines();
+        self.cached_highlights = None;
         
         // Move cursor
         for c in text.chars() {
@@ -189,6 +196,7 @@ impl Buffer {
             self.rope.remove(char_idx..char_idx + 1);
             self.modified = true;
             self.line_count = self.rope.len_lines();
+            self.cached_highlights = None;
         } else if self.cursor_line > 0 {
             // Join with previous line
             self.cursor_line -= 1;
@@ -206,6 +214,7 @@ impl Buffer {
             self.rope.remove(char_idx..char_idx + 1);
             self.modified = true;
             self.line_count = self.rope.len_lines();
+            self.cached_highlights = None;
         }
     }
     
@@ -225,6 +234,7 @@ impl Buffer {
             self.rope.remove(char_idx..char_idx + 1);
             self.modified = true;
             self.line_count = self.rope.len_lines();
+            self.cached_highlights = None;
         }
     }
     

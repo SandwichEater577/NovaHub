@@ -1101,63 +1101,75 @@ footer::before {
   display: flex;
   background: rgba(0, 0, 0, 0.3);
   border-bottom: 1px solid var(--border);
+  gap: 0;
 }
 
 .os-tab {
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 18px 20px;
+  gap: 12px;
+  padding: 20px 32px;
   background: transparent;
   color: var(--text-muted);
-  border: none;
+  border: none; /* Removed border */
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all var(--transition);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  border-radius: 0; /* Middle buttons are square */
 }
 
-.os-tab::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--gradient-accent);
-  transform: scaleX(0);
-  transition: transform var(--transition);
+/* Windows: Top-Left Rounded ONLY */
+.os-tab:first-child {
+  border-radius: var(--radius-xl) 0 0 0;
+}
+
+/* Linux: Top-Right Rounded ONLY */
+.os-tab:last-child {
+  border-radius: 0 var(--radius-xl) 0 0;
 }
 
 .os-tab:hover {
   color: var(--text);
   background: rgba(255, 255, 255, 0.03);
+  z-index: 1;
 }
 
 .os-tab.active {
   color: #fff;
   background: rgba(108, 160, 220, 0.08);
+  z-index: 2;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05); /* Subtle white glow */
 }
 
-.os-tab.active::after {
-  transform: scaleX(1);
-}
+/* Removed double border prevention since borders are gone */
 
 .os-icon {
-  width: 22px;
-  height: 22px;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  filter: brightness(0) invert(0.6);
+  width: 32px;
+  height: 32px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: brightness(0) invert(1);
 }
 
-.os-tab:hover .os-icon,
-.os-tab.active .os-icon {
-  filter: brightness(0) invert(1);
+/* Hover effects: Restore brand colors */
+.os-tab[data-os="windows"]:hover .os-icon,
+.os-tab[data-os="windows"].active .os-icon {
+  filter: none;
+}
+
+.os-tab[data-os="macos"]:hover .os-icon,
+.os-tab[data-os="macos"].active .os-icon {
+  filter: none;
+  content: url("https://upload.wikimedia.org/wikipedia/commons/8/84/Apple_Computer_Logo_rainbow.svg");
+}
+
+.os-tab[data-os="linux"]:hover .os-icon,
+.os-tab[data-os="linux"].active .os-icon {
+  filter: none;
 }
 
 .os-panel {

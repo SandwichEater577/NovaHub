@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Valyxo Online - Try Valyxo in your browser"
+    />
+    <title>Valyxo – Online</title>
+    <link rel="stylesheet" href="../CSS/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html" class="logo">
+          <img src="../Assets/logo-without-text.png" alt="Valyxo Logo" />
+          <span>Valyxo</span>
+        </a>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="why.html">Why Valyxo?</a></li>
+          <li><a href="online.html" class="active">Online</a></li>
+          <li><a href="download.html">Download</a></li>
+          <li><a href="project.html">Project</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="online-container">
+        <div class="online-hero">
+          <h1>Valyxo <span class="gradient-text">Online</span></h1>
+          <p>Try Valyxo directly in your browser — no installation required</p>
+        </div>
+
+        <div class="terminal-container">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="terminal-title">valyxo — online</span>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-output" id="terminal-output"></div>
+            <div class="terminal-input-line">
+              <span class="prompt" id="prompt-text">valyxo:/> </span>
+              <input
+                type="text"
+                id="terminal-input"
+                autofocus
+                autocomplete="off"
+                spellcheck="false"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="online-info">
+          <div class="info-card">
+            <h3>
+              <i class="fi fi-rr-interrogation"></i>
+              Getting Started
+            </h3>
+            <p>
+              Type <code>-help</code> to see available commands. Use
+              <code>man &lt;command&gt;</code> for detailed documentation.
+            </p>
+          </div>
+          <div class="info-card">
+            <h3>
+              <i class="fi fi-rr-terminal"></i>
+              Terminal Commands
+            </h3>
+            <p>
+              Navigate with <code>cd</code>, <code>ls</code>. Create files with
+              <code>nano</code>. Run scripts with <code>run</code>.
+            </p>
+          </div>
+          <div class="info-card">
+            <h3>
+              <i class="fi fi-rr-code-simple"></i>
+              ValyxoScript
+            </h3>
+            <p>
+              Enter <code>enter ValyxoScript</code> to use the built-in
+              scripting language for automation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img
+            src="../Assets/logo-without-text.png"
+            alt="Valyxo"
+            class="footer-logo"
+          />
+          <span>Valyxo</span>
+        </div>
+        <nav class="footer-nav">
+          <a href="index.html">Home</a>
+          <a href="why.html">Why Valyxo?</a>
+          <a href="online.html">Online</a>
+          <a href="download.html">Download</a>
+          <a href="project.html">Project</a>
+          <a href="contact.html">Contact</a>
+          <a href="https://github.com/SandwichEater577/Valyxo" target="_blank"
+            >GitHub</a
+          >
+        </nav>
+        <div class="footer-copy">
+          &copy; 2025 Michal Kostkowski. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="../../Backend/TypeScript/animations.js"></script>
+    <script type="module">
+      import {
+        init,
+        terminal_input,
+        get_cwd,
+      } from "../../Backend/TypeScript/terminal.js";
+
+      const output = document.getElementById("terminal-output");
+      const input = document.getElementById("terminal-input");
+      const promptText = document.getElementById("prompt-text");
+
+      const history = [];
+      let historyIndex = -1;
+
+      async function start() {
+        try {
+          await init();
+          console.log("JS Engine Initialized");
+          showStartup();
+          updatePrompt();
+        } catch (e) {
+          console.error("WASM load error:", e);
+          printLine(
+            "Error: Terminal engine failed to load. Please refresh.",
+            "error"
+          );
+        }
+      }
+
+      function printLine(text, className = "") {
+        const line = document.createElement("div");
+        line.className = "line " + className;
+        line.textContent = text;
+        output.appendChild(line);
+      }
+
+      function printHTML(html) {
+        const line = document.createElement("div");
+        line.className = "line";
+        line.innerHTML = html;
+        output.appendChild(line);
+      }
+
+      function updatePrompt() {
+        const cwd = get_cwd();
+        promptText.textContent = `valyxo:${cwd}> `;
+      }
+
+      function scrollToBottom() {
+        const body = document.querySelector(".terminal-body");
+        body.scrollTop = body.scrollHeight;
+      }
+
+      function showStartup() {
+        const banner = `
+  __     __    _                      
+  \\ \\   / /_ _| |_   ___  _____  
+   \\ \\ / / _\` | | | | \\ \\/ / _ \\ 
+    \\ V / (_| | | |_| |>  < (_) |
+     \\_/ \\__,_|_|\\__, /_/\\_\\___/ 
+                 |___/            
+
+   Valyxo v0.6.0 Online (JS Terminal Engine) ⚡
+   Type '-help' for commands or 'man valyxo' for help
+`;
+        printLine(banner, "banner");
+        printLine("");
+      }
+
+      function processCommand(cmdLine) {
+        const trimmed = cmdLine.trim();
+        if (!trimmed) return;
+
+        history.push(trimmed);
+        historyIndex = history.length;
+
+        printHTML(
+          `<span class="prompt">${promptText.textContent}</span>${trimmed}`
+        );
+
+        // Call our Rust wrapper
+        const result = terminal_input(trimmed);
+
+        if (result === "CLEAR_COMMAND") {
+          output.innerHTML = "";
+        } else if (result) {
+          printLine(result);
+        }
+
+        updatePrompt();
+        scrollToBottom();
+      }
+
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          processCommand(input.value);
+          input.value = "";
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          if (historyIndex > 0) {
+            historyIndex--;
+            input.value = history[historyIndex];
+          }
+        } else if (e.key === "ArrowDown") {
+          e.preventDefault();
+          if (historyIndex < history.length - 1) {
+            historyIndex++;
+            input.value = history[historyIndex];
+          } else {
+            historyIndex = history.length;
+            input.value = "";
+          }
+        }
+      });
+
+      document.querySelector(".terminal-body").addEventListener("click", () => {
+        input.focus();
+      });
+
+      start();
+    </script>
+  </body>
+</html>

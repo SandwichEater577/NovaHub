@@ -89,11 +89,8 @@ impl ValyxoApp {
             .unwrap()
             .insert(0, "JetBrains Mono".to_owned());
         
-        // Also use for proportional for consistency
-        fonts.families
-            .get_mut(&FontFamily::Proportional)
-            .unwrap()
-            .insert(0, "JetBrains Mono".to_owned());
+        // Use system default for proportional (Sans-Serif) for better UI legibility
+        // fonts.families.get_mut(&FontFamily::Proportional).unwrap().insert(0, "Inter".to_owned());
         
         cc.egui_ctx.set_fonts(fonts);
         
@@ -103,16 +100,16 @@ impl ValyxoApp {
         
         // Configure style for better UI
         let mut style = (*cc.egui_ctx.style()).clone();
-        style.spacing.item_spacing = egui::vec2(8.0, 6.0);
-        style.spacing.button_padding = egui::vec2(8.0, 4.0);
-        style.spacing.window_margin = egui::Margin::same(12.0);
-        style.visuals.window_rounding = egui::Rounding::same(8.0);
-        style.visuals.menu_rounding = egui::Rounding::same(6.0);
-        style.visuals.widgets.noninteractive.rounding = egui::Rounding::same(4.0);
-        style.visuals.widgets.inactive.rounding = egui::Rounding::same(4.0);
-        style.visuals.widgets.hovered.rounding = egui::Rounding::same(4.0);
-        style.visuals.widgets.active.rounding = egui::Rounding::same(4.0);
-        style.animation_time = 0.15; // Smooth animations
+        style.spacing.item_spacing = egui::vec2(10.0, 8.0);
+        style.spacing.button_padding = egui::vec2(12.0, 6.0);
+        style.spacing.window_margin = egui::Margin::same(16.0);
+        style.visuals.window_rounding = egui::Rounding::same(12.0);
+        style.visuals.menu_rounding = egui::Rounding::same(10.0);
+        style.visuals.widgets.noninteractive.rounding = egui::Rounding::same(8.0);
+        style.visuals.widgets.inactive.rounding = egui::Rounding::same(8.0);
+        style.visuals.widgets.hovered.rounding = egui::Rounding::same(8.0);
+        style.visuals.widgets.active.rounding = egui::Rounding::same(8.0);
+        style.animation_time = 0.2; // Smooth animations
         cc.egui_ctx.set_style(style);
         
         // Load config
@@ -363,36 +360,64 @@ impl eframe::App for ValyxoApp {
             });
         });
         
-        // Bottom panel - Status bar with improved styling
-        let elapsed = self.start_time.elapsed().as_secs();
+        // Bottom panel - Status bar with Cursor-inspired blended styling
         egui::TopBottomPanel::bottom("status_bar")
             .exact_height(26.0)
+            .frame(egui::Frame::none().fill(self.theme.background_color()).inner_margin(egui::Margin::symmetric(8.0, 2.0)))
             .show(ctx, |ui| {
                 ui.horizontal(|ui| {
-                    // Status message with icon
-                    ui.label(&self.status_message);
+                    ui.spacing_mut().item_spacing.x = 12.0;
+
+                    // Git branch and error info on the left
+                    ui.label(egui::RichText::new(" main*").size(12.0).weak());
                     
-                    ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-                        // Session time
-                        ui.label(format!("⏱️ {}:{:02}", elapsed / 60, elapsed % 60));
-                        ui.separator();
-                        
-                        // Line/column indicator
-                        if let Some(buffer_id) = self.tab_bar.current_buffer_id() {
-                            if let Some(buffer) = self.buffers.get(buffer_id) {
-                                ui.label(format!("📍 Ln {}, Col {}", buffer.cursor_line + 1, buffer.cursor_col + 1));
-                                ui.separator();
-                                ui.label(format!("📝 {}", &buffer.language));
-                                ui.separator();
-                            }
+                    if let Some(buffer_id) = self.tab_bar.current_buffer_id() {
+                        if let Some(buffer) = self.buffers.get(buffer_id) {
+                            ui.label(egui::RichText::new(format!("Ln {}, Col {}", buffer.cursor_line + 1, buffer.cursor_col + 1)).size(12.0).weak());
                         }
-                        
-                        // Encoding and line ending
-                        ui.label("UTF-8 | LF");
+                    }
+
+                    ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                        ui.label(egui::RichText::new("Cursor-Tab").size(12.0).weak());
+                        ui.add_space(8.0);
+                        ui.label("🔔");
                     });
                 });
             });
         
+        // Activity Bar - Left narrow panel for icons
+        egui::SidePanel::left("activity_bar")
+            .exact_width(48.0)
+            .resizable(false)
+            .frame(egui::Frame::none().fill(self.theme.background_color()).inner_margin(egui::Margin::symmetric(0.0, 8.0)))
+            .show(ctx, |ui| {
+                ui.vertical_centered(|ui| {
+                    ui.add_space(12.0);
+                    
+                    // Icon buttons
+                    let button_size = egui::vec2(32.0, 32.0);
+                    
+                    // Selected highlight for Explorer
+                    if ui.add_sized(button_size, egui::Button::new("📄").frame(true)).clicked() {
+                        self.show_file_tree = !self.show_file_tree;
+                    }
+                    ui.add_space(12.0);
+                    
+                    ui.add_sized(button_size, egui::Button::new("🔍").frame(false));
+                    ui.add_space(12.0);
+                    
+                    ui.add_sized(button_size, egui::Button::new("").frame(false));
+                    ui.add_space(12.0);
+                    
+                    ui.add_sized(button_size, egui::Button::new("🧩").frame(false));
+                    
+                    ui.with_layout(egui::Layout::bottom_up(egui::Align::Center), |ui| {
+                        ui.add_space(12.0);
+                        ui.add_sized(button_size, egui::Button::new("⚙").frame(false));
+                    });
+                });
+            });
+
         // Left panel - File tree with improved styling
         if self.show_file_tree {
             egui::SidePanel::left("file_tree")
@@ -432,7 +457,7 @@ impl eframe::App for ValyxoApp {
             if let Some(buffer_id) = self.tab_bar.current_buffer_id() {
                 if let Some(buffer) = self.buffers.get_mut(buffer_id) {
                     let syntax = Arc::clone(&self.syntax);
-                    Editor::show(ui, buffer, syntax);
+                    Editor::show(ui, buffer, syntax, &self.theme);
                 }
             } else {
                 // Welcome screen with better styling

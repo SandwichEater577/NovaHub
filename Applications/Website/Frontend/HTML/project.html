@@ -275,62 +275,11 @@
       <div class="repo-languages">
         <h3>Languages</h3>
         <div class="language-bar" id="language-bar">
-          <div
-            class="lang-segment"
-            style="width: 34.2%; background: #3572a5"
-            title="Python: 34.2%"
-          ></div>
-          <div
-            class="lang-segment"
-            style="width: 21.2%; background: #dea584"
-            title="Rust: 21.2%"
-          ></div>
-          <div
-            class="lang-segment"
-            style="width: 16%; background: #f1e05a"
-            title="JavaScript: 16.0%"
-          ></div>
-          <div
-            class="lang-segment"
-            style="width: 9.8%; background: #e34c26"
-            title="HTML: 9.8%"
-          ></div>
-          <div
-            class="lang-segment"
-            style="width: 9.5%; background: #563d7c"
-            title="CSS: 9.5%"
-          ></div>
-          <div
-            class="lang-segment"
-            style="width: 8.1%; background: #00add8"
-            title="Go: 8.1%"
-          ></div>
+          <!-- Dynamic loading indicator -->
+          <div class="loading-state">Loading languages...</div>
         </div>
         <div class="language-list" id="language-list">
-          <div class="lang-item">
-            <span class="lang-dot" style="background: #3572a5"></span> Python
-            <span class="lang-percent">34.2%</span>
-          </div>
-          <div class="lang-item">
-            <span class="lang-dot" style="background: #dea584"></span> Rust
-            <span class="lang-percent">21.2%</span>
-          </div>
-          <div class="lang-item">
-            <span class="lang-dot" style="background: #f1e05a"></span>
-            JavaScript <span class="lang-percent">16.0%</span>
-          </div>
-          <div class="lang-item">
-            <span class="lang-dot" style="background: #e34c26"></span> HTML
-            <span class="lang-percent">9.8%</span>
-          </div>
-          <div class="lang-item">
-            <span class="lang-dot" style="background: #563d7c"></span> CSS
-            <span class="lang-percent">9.5%</span>
-          </div>
-          <div class="lang-item">
-            <span class="lang-dot" style="background: #00add8"></span> Go
-            <span class="lang-percent">8.1%</span>
-          </div>
+          <!-- Will be populated by project.ts -->
         </div>
       </div>
     </main>
@@ -362,8 +311,8 @@
       </div>
     </footer>
 
-    <script src="../TypeScript/animations.js"></script>
+    <script src="../../Backend/TypeScript/animations.js"></script>
     <!-- Logic extracted to project.ts -->
-    <script type="module" src="../TypeScript/project.js"></script>
+    <script type="module" src="../../Backend/TypeScript/project.js"></script>
   </body>
 </html>

@@ -247,6 +247,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 **[⬆ Back to Top](#)**
 
-Made with ❤️ and lots of ☕
+Made with ☕ and a lot of time.
 
 </div>
