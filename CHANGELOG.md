@@ -1,5 +1,18 @@
 # Valyxo Changelog
 
+## [v0.6.1] - 2025-12-20
+
+### 🛠️ Patch Release — v0.6.1
+
+This release includes minor fixes, documentation updates and a version bump to ensure consistency across packaging and releases.
+
+- Fix: restore missing/accidentally deleted test script handling (`run_tests.py`) on some workflows
+- Fix: minor documentation and badge updates
+- Chore: repository metadata and packaging corrections
+
+---
+
+
 ## [v0.5.2] - 2025-01-XX (Desktop)
 
 ### 🦀 Rust Native Backend

@@ -11,7 +11,7 @@
 
 ### The Modern Developer Platform
 
-[![Version](https://img.shields.io/badge/version-0.6.0-blue.svg?style=for-the-badge)](https://github.com/SandwichEater577/Valyxo)
+[![Version](https://img.shields.io/badge/version-0.6.1-blue.svg?style=for-the-badge)](https://github.com/SandwichEater577/Valyxo)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.9+-yellow.svg?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![Rust](https://img.shields.io/badge/Rust-Native-orange.svg?style=for-the-badge&logo=rust&logoColor=white)](https://rust-lang.org)
@@ -56,7 +56,7 @@ That's it. You're now in the Valyxo shell.
 ```
 ┌─────────────────────────────────────────────────────┐
 │  $ valyxo                                           │
-│  ✓ Welcome to Valyxo v0.6.0                        │
+│  ✓ Welcome to Valyxo v0.6.1                        │
 │  ✓ Type 'help' for commands                        │
 │                                                     │
 │  valyxo > init my-project                          │
