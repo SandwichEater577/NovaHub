@@ -12,7 +12,6 @@ This release includes minor fixes, documentation updates and a version bump to e
 
 ---
 
-
 ## [v0.5.2] - 2025-01-XX (Desktop)
 
 ### 🦀 Rust Native Backend
